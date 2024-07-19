@@ -4,6 +4,6 @@ This navigation system is based on QT framework. It can simulate maps in the rea
 You can use it by [navigation_system.exe](https://github.com/crystallizedsnow/NavigationSystem/blob/main/nevegation_system.exe)
 <img width="902" alt="image" src="https://github.com/user-attachments/assets/6b99d342-3d4b-4fde-9d1f-f2f81c8967c3">.
 ## Co-author
-[crystallizedsnow](https://github.com/crystallizedsnow)
+[crystallizedsnow](https://github.com/crystallizedsnow) 
 [dawn-wisdom](https://github.com/dawn-wisdom)
 
