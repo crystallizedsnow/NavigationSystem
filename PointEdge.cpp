@@ -1,4 +1,6 @@
 #include "PointEdge.h"
+#include<QTime>
+#include <QDebug>
 Edge::Edge(int p)
 {
     next = nullptr;
@@ -339,6 +341,9 @@ int initial_edges2(int** secondeNo,PointRoad* points,EdgeL* edges,EdgeL* edges2)
 vector<int> Graph::dijkstra(int start, int end)
 {
     cout << "dijkstra:\n";
+
+    QTime qTime;
+    qTime.start();
     int* node_before = new int[pnum];//记录该结点路径的前驱节点
     int pos = start;
     double* len = new double[pnum];//记录当前状态各点距离
@@ -389,6 +394,7 @@ vector<int> Graph::dijkstra(int start, int end)
             }
         }
     }
+    qDebug()<<"Dijkstra运行时间"<<qTime.elapsed()<<"ms";
     cout << "shortestLen:" << len[end] << endl;
     vector<pair<double, double>>path_coordinate;//记录路径坐标
     //vector<int>pathPoint;
@@ -412,6 +418,8 @@ double Graph::inspire_function(int p1, int p2) //选用欧几里得距离作为�
 vector<int> Graph::astar(int start, int end)
 {
     cout << "Astar:\n";
+    QTime qTime;
+    qTime.start();
     int pos = start;
     int* node_before = new int[pnum];//记录该结点路径的前驱节点
     double* len = new double[pnum];//记录当前状态各点F值
@@ -420,7 +428,7 @@ vector<int> Graph::astar(int start, int end)
     double shortestF = edges[pos].head->next->distance + inspire_function(end, edges[pos].head->next->point);//记录当前最短F值（F=总路程+两点欧几里得距离）
     int shortestpoint = 0;//记录要加入visited集合的点
     vector<int>path;//记录走过的最短路径包括的点
-    double shortestDist = edges[pos].head->next->distance;
+    double shortestDist = edges[pos].head->next->distance;//记录实际距离g
     for (int i = 0; i < pnum; i++)
     {
         len[i] = 100000000;
@@ -462,15 +470,19 @@ vector<int> Graph::astar(int start, int end)
         {
             if (mark[edges[pos].fence->point] == 1)
                 continue;
-            if (len[edges[pos].fence->point] > len[pos] + edges[pos].fence->distance)
+            if (len[edges[pos].fence->point] > dist[pos] + edges[pos].fence->distance+ inspire_function(end, edges[pos].fence->point))
             {
-                len[edges[pos].fence->point] = len[pos] + edges[pos].fence->distance+ inspire_function(end, edges[pos].fence->point);
+                len[edges[pos].fence->point] = dist[pos] + edges[pos].fence->distance+ inspire_function(end, edges[pos].fence->point);
                 dist[edges[pos].fence->point] = dist[pos] + edges[pos].fence->distance;
                 node_before[edges[pos].fence->point] = pos;
             }
         }
     }
+    double endtime = clock();
+    double last = start - end;
+   qDebug()<<"A*运行时间"<<qTime.elapsed()<<"ms";
     cout << "shortestLen(A*):" << dist[end] << endl;
+
     vector<pair<double, double>>path_coordinate;//记录路径坐标
     //vector<int>pathPoint;
     if(!pathPoint.empty())
