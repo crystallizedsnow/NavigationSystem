@@ -6,9 +6,9 @@ You can use it by [navigation_system.exe](https://github.com/crystallizedsnow/Na
 ## Stimulation
 Divide the space into squares and put one point at each square randomly. Connect the points with their four neibour points(up,down,left right) as edges, forming the roadnet.    
 ## Algorithms
-**KDTree** to find the top 100 closest points to any point you select.
-**Dijkstra** to find the shortest route.
-**A\*** to find the shortest route. Proving that A* is faster than Dijkstra when solving finding closest route task.
+**KDTree** to find the top 100 closest points to any point you select.<br>
+**Dijkstra** to find the shortest route.<br>
+**A\*** to find the shortest route. Proving that A* is faster than Dijkstra when solving finding closest route task.<br>
 ## Co-author
 [crystallizedsnow](https://github.com/crystallizedsnow)  
 [dawn-wisdom](https://github.com/dawn-wisdom)
